@@ -1,16 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-// use Axios to get assets
 async function fetchAssets() {
-  const { data } = await axios.get("/api/assets");
-
-  return data.data;
+  const { data } = await axios.get("/api/topAssets");
+  return data;
 }
 
 function useAssets() {
   return useQuery({
-    queryKey: ["posts"],
+    queryKey: ["assets"],
     queryFn: fetchAssets,
   });
 }

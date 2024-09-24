@@ -2,6 +2,8 @@ import { Card, Flex, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/r
 import { NextPage } from "next";
 import Link from "next/link";
 import useAssets from "@/helpers/fetchAssets";
+import AssetCard from "@/components/AssetCard";
+import { Asset } from "@/types/asset";
 
 const Home: NextPage = () => {
   const { data, error, isLoading } = useAssets();
@@ -14,11 +16,20 @@ const Home: NextPage = () => {
     return <div>Error: {(error as Error).message}</div>;
   }
 
-  //console.log(data);
+  console.log(data);
 
   return (
-    <Flex justifyContent="center" alignItems="center" height="100vh" flexDirection="column">
+    <Flex justifyContent="center" alignItems="center" flexDirection="column">
       <Heading>🚀 Asset Tracker</Heading>
+      {data && (
+        <div>
+          <UnorderedList>
+            {data.map((item: Asset) => (
+              <AssetCard key={item.id} asset={item} />
+            ))}
+          </UnorderedList>
+        </div>
+      )}
     </Flex>
   );
 };
