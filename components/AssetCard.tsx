@@ -1,6 +1,17 @@
 import React from "react";
 import { Asset } from "@/types/asset";
-import { Tr, Td, Image } from "@chakra-ui/react";
+import {
+  Tr,
+  Td,
+  Image,
+  Text,
+  Box,
+  Stat,
+  StatNumber,
+  StatLabel,
+  StatArrow,
+  StatHelpText,
+} from "@chakra-ui/react";
 
 interface Props {
   asset: Asset;
@@ -23,11 +34,12 @@ function formatNumber(num: number): string {
 }
 
 const AssetCard: React.FC<Props> = ({ asset }) => (
-  <Tr>
+  <Tr padding="20px">
     <Td># {asset.cmc_rank}</Td>
-    <Td>
+    <Td display="flex" flexDirection="row">
       <Image
-        boxSize="100px"
+        boxSize="40px"
+        paddingRight="10px"
         src={`/assets/color/${asset.symbol.toLowerCase()}.svg`}
         alt={`${asset.symbol} icon`}
         onError={(e) => {
@@ -35,11 +47,20 @@ const AssetCard: React.FC<Props> = ({ asset }) => (
           e.currentTarget.alt = "Generic icon";
         }}
       />
-      <p>{asset.name}</p>
-      <p>{currencyFormat(asset.price)}</p>
+      <Stat>
+        <StatLabel>{asset.symbol}</StatLabel>
+        <StatLabel>{formatNumber(asset.market_cap)}</StatLabel>
+      </Stat>
     </Td>
     <Td>{currencyFormat(asset.price)}</Td>
-    <Td>%{asset.percent_change_24h.toFixed(2)}</Td>
+    <Td>
+      <Stat>
+        <StatHelpText>
+          <StatArrow type={asset.percent_change_24h >= 0 ? "increase" : "decrease"} />%
+          {Math.abs(asset.percent_change_24h).toFixed(2)}
+        </StatHelpText>
+      </Stat>
+    </Td>
   </Tr>
 );
 
