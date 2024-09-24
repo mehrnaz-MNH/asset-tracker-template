@@ -1,18 +1,27 @@
 import { Card, Flex, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Link from "next/link";
+import useAssets from "@/helpers/fetchAssets";
 
-const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const Home: NextPage = () => {
+  const { data, error, isLoading } = useAssets();
 
-console.log(apiKey);
-console.log(apiUrl);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-const Home: NextPage = () => (
-  <Flex justifyContent="center" alignItems="center" height="100vh" flexDirection="column">
-    <Heading>🚀 Asset Tracker</Heading>
-  </Flex>
-);
+  if (error) {
+    return <div>Error: {(error as Error).message}</div>;
+  }
+
+  //console.log(data);
+
+  return (
+    <Flex justifyContent="center" alignItems="center" height="100vh" flexDirection="column">
+      <Heading>🚀 Asset Tracker</Heading>
+    </Flex>
+  );
+};
 
 export default Home;
 
