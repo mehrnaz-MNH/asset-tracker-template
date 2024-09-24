@@ -1,6 +1,6 @@
 import React from "react";
 import { Asset } from "@/types/asset";
-import { Box, ListItem, Image } from "@chakra-ui/react";
+import { Tr, Td, Image } from "@chakra-ui/react";
 
 interface Props {
   asset: Asset;
@@ -23,20 +23,9 @@ function formatNumber(num: number): string {
 }
 
 const AssetCard: React.FC<Props> = ({ asset }) => (
-  <ListItem key={asset.id} justifyContent="center" alignItems="center">
-    <Box
-      display="flex"
-      flexDirection="row"
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      p={4}
-      boxShadow="md"
-      _hover={{ boxShadow: "xl", transform: "scale(1.02)" }}
-      transition="0.3s ease-in-out"
-    >
-      <p># {asset.cmc_rank}</p>
-      <p>{asset.name}</p>
+  <Tr>
+    <Td># {asset.cmc_rank}</Td>
+    <Td>
       <Image
         boxSize="100px"
         src={`/assets/color/${asset.symbol.toLowerCase()}.svg`}
@@ -46,11 +35,46 @@ const AssetCard: React.FC<Props> = ({ asset }) => (
           e.currentTarget.alt = "Generic icon";
         }}
       />
-      <p>{formatNumber(asset.market_cap)}</p>
+      <p>{asset.name}</p>
       <p>{currencyFormat(asset.price)}</p>
-      <p>%{asset.percent_change_24h.toFixed(2)}</p>
-    </Box>
-  </ListItem>
+    </Td>
+    <Td>{currencyFormat(asset.price)}</Td>
+    <Td>%{asset.percent_change_24h.toFixed(2)}</Td>
+  </Tr>
 );
 
 export default AssetCard;
+
+// <Th>#</Th>
+//             <Th>Name</Th>
+//             <Th>Price</Th>
+//             <Th>24h%</Th>
+
+// <ListItem key={asset.id} justifyContent="center" alignItems="center">
+//     <Box
+//       display="flex"
+//       flexDirection="row"
+//       borderWidth="1px"
+//       borderRadius="lg"
+//       overflow="hidden"
+//       p={4}
+//       boxShadow="md"
+//       _hover={{ boxShadow: "xl", transform: "scale(1.02)" }}
+//       transition="0.3s ease-in-out"
+//     >
+//       <p># {asset.cmc_rank}</p>
+//       <p>{asset.name}</p>
+//       <Image
+//         boxSize="100px"
+//         src={`/assets/color/${asset.symbol.toLowerCase()}.svg`}
+//         alt={`${asset.symbol} icon`}
+//         onError={(e) => {
+//           e.currentTarget.src = "/assets/color/generic.svg";
+//           e.currentTarget.alt = "Generic icon";
+//         }}
+//       />
+//       <p>{formatNumber(asset.market_cap)}</p>
+//       <p>{currencyFormat(asset.price)}</p>
+//       <p>%{asset.percent_change_24h.toFixed(2)}</p>
+//     </Box>
+//   </ListItem>

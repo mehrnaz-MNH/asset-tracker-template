@@ -4,6 +4,7 @@ import Link from "next/link";
 import useAssets from "@/helpers/fetchAssets";
 import AssetCard from "@/components/AssetCard";
 import { Asset } from "@/types/asset";
+import AssetsTable from "@/components/AssetsTable";
 
 const Home: NextPage = () => {
   const { data, error, isLoading } = useAssets();
@@ -21,15 +22,7 @@ const Home: NextPage = () => {
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column">
       <Heading>🚀 Asset Tracker</Heading>
-      {data && (
-        <div>
-          <UnorderedList>
-            {data.map((item: Asset) => (
-              <AssetCard key={item.id} asset={item} />
-            ))}
-          </UnorderedList>
-        </div>
-      )}
+      <AssetsTable assets={data} />
     </Flex>
   );
 };

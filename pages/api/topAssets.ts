@@ -5,12 +5,6 @@ import { Asset } from "@/types/asset";
 const apiKey = process.env.NEXT_PUBLIC_API_KEY as string;
 const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
 
-// let topAssets: Asset[] = [];
-
-// interface GetAssetResponse {
-//   data: Asset[];
-// }
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const response = await axios.get(apiUrl, {
