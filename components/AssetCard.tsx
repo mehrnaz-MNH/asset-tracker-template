@@ -57,7 +57,7 @@ const AssetCard: React.FC<Props> = ({ asset }) => (
       <Stat>
         <StatHelpText>
           <StatArrow type={asset.percent_change_24h >= 0 ? "increase" : "decrease"} />%
-          {Math.abs(asset.percent_change_24h).toFixed(2)}
+          {Math.abs(asset.percent_change_24h).toFixed(3)}
         </StatHelpText>
       </Stat>
     </Td>
