@@ -1,10 +1,12 @@
 import { Card, Flex, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+
 import { NextPage } from "next";
+
 import Link from "next/link";
-import useAssets from "@/helpers/fetchAssets";
-import AssetCard from "@/components/AssetCard";
-import { Asset } from "@/types/asset";
+
 import AssetsTable from "@/components/AssetsTable";
+
+import useAssets from "@/helpers/fetchAssets";
 
 const Home: NextPage = () => {
   const { data, error, isLoading } = useAssets();

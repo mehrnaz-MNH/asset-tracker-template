@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Table,
   Thead,
@@ -11,8 +10,9 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-import { Asset } from "@/types/asset";
 import AssetCard from "./AssetCard";
+
+import { Asset } from "@/types/asset";
 
 interface Props {
   assets: Asset[];
@@ -21,7 +21,7 @@ interface Props {
 const AssetsTable: React.FC<Props> = ({ assets }) => {
   return (
     <TableContainer>
-      <Table variant="simple">
+      <Table variant="stripped">
         <TableCaption>
           top 25 cryptocurrency tokens ordered by highest volume to lowest
         </TableCaption>

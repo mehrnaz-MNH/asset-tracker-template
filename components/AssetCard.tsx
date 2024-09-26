@@ -1,5 +1,3 @@
-import React from "react";
-import { Asset } from "@/types/asset";
 import {
   Tr,
   Td,
@@ -12,6 +10,8 @@ import {
   StatArrow,
   StatHelpText,
 } from "@chakra-ui/react";
+
+import { Asset } from "@/types/asset";
 
 interface Props {
   asset: Asset;
@@ -34,7 +34,7 @@ function formatNumber(num: number): string {
 }
 
 const AssetCard: React.FC<Props> = ({ asset }) => (
-  <Tr padding="20px">
+  <Tr padding="20px" borderBlock="1px" paddingBlock="10px solid grey">
     <Td># {asset.cmc_rank}</Td>
     <Td display="flex" flexDirection="row">
       <Image
