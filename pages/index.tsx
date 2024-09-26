@@ -1,8 +1,6 @@
-import { Card, Flex, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 
 import { NextPage } from "next";
-
-import Link from "next/link";
 
 import AssetsTable from "@/components/AssetsTable";
 
@@ -34,3 +32,4 @@ export default Home;
 // https://tanstack.com/query/latest/docs/framework/react/overview
 // https://chakra-ui.com/docs/getting-started
 // https://nextjs.org/docs
+// import Link from "next/link";
