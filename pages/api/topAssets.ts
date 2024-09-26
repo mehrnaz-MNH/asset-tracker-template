@@ -1,7 +1,5 @@
 import axios from "axios";
-
 import { NextApiRequest, NextApiResponse } from "next";
-
 import { Asset } from "@/types/asset";
 
 const apiKey = process.env.NEXT_PUBLIC_API_KEY as string;
