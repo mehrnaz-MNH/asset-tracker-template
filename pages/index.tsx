@@ -1,9 +1,6 @@
 import { Flex, Heading } from "@chakra-ui/react";
-
 import { NextPage } from "next";
-
 import AssetsTable from "@/components/AssetsTable";
-
 import useAssets from "@/helpers/fetchAssets";
 
 const Home: NextPage = () => {

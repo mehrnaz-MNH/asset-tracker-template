@@ -1,16 +1,4 @@
-import {
-  Tr,
-  Td,
-  Image,
-  Text,
-  Box,
-  Stat,
-  StatNumber,
-  StatLabel,
-  StatArrow,
-  StatHelpText,
-} from "@chakra-ui/react";
-
+import { Tr, Td, Image, Stat, StatLabel, StatArrow, StatHelpText } from "@chakra-ui/react";
 import { Asset } from "@/types/asset";
 
 interface Props {
