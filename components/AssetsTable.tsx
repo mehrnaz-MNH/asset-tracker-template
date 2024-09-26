@@ -1,6 +1,6 @@
 import { Table, Thead, Tbody, Tr, Th, TableCaption, TableContainer } from "@chakra-ui/react";
 
-import AssetCard from "./AssetCard";
+import AssetCard from "@/components/AssetCard";
 import { Asset } from "@/types/asset";
 
 interface Props {
