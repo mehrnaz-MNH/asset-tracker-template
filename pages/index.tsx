@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Heading,
-  Input,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { Divider, Flex, Heading } from "@chakra-ui/react";
 import { NextPage } from "next";
 
 import AssetsTable from "@/components/AssetsTable";
@@ -43,9 +34,6 @@ const Home: NextPage = () => {
     }
   };
 
-  console.log(data);
-  console.log(searchData);
-
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column">
       <SearchBar
@@ -66,7 +54,9 @@ const Home: NextPage = () => {
             <div>No result returned for this input, try again.</div>
           ) : null}
 
-          <Divider />
+          <Divider m={25} />
+
+          <Heading mb={30}>Top 25 Crypto Assets</Heading>
 
           <AssetsTable
             assets={data}

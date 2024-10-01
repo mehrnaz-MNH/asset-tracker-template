@@ -23,7 +23,7 @@ function formatNumber(num: number): string {
 }
 
 const AssetCard: React.FC<Props> = ({ asset }) => (
-  <Tr padding="20px" borderBlock="1px" paddingBlock="10px solid grey">
+  <Tr padding="20px" borderBlock="1px" paddingBlock="10px solid grey" mb={10}>
     <Td># {asset.cmc_rank}</Td>
     <Td display="flex" flexDirection="row">
       <Image

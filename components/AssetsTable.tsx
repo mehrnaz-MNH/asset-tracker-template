@@ -22,10 +22,10 @@ interface Props {
 
 const AssetsTable: React.FC<Props> = ({ assets, sortedField, handleSortClick, orderField }) => (
   <TableContainer>
-    <Table variant="stripped">
+    <Table variant="simple" bg="black" color="white" border="none" borderRadius={50}>
       <TableCaption>top 25 cryptocurrency tokens ordered by highest volume to lowest</TableCaption>
       <Thead>
-        <Tr>
+        <Tr bg="gray.800">
           <Th>
             #
             <Button variant="link" onClick={() => handleSortClick("market_cap")}>
@@ -84,7 +84,7 @@ const AssetsTable: React.FC<Props> = ({ assets, sortedField, handleSortClick, or
           </Th>
         </Tr>
       </Thead>
-      <Tbody>
+      <Tbody bg="gray.800">
         {assets.map((asset: Asset) => (
           <AssetCard key={asset.id} asset={asset} />
         ))}
