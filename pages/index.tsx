@@ -1,18 +1,27 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Heading,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 import { NextPage } from "next";
 
 import AssetsTable from "@/components/AssetsTable";
+import AssetsSearchTable from "@/components/AssetSearchTable";
 import SearchBar from "@/components/SearchBar";
 import useAssets from "@/helpers/fetchAssets";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Asset } from "@/types/asset";
 
 const Home: NextPage = () => {
   const [sortedField, setSortedField] = useState<string>("market_cap");
   const [orderField, setOrderField] = useState<string>("desc");
-  //let sort_filed = sortedField ? sortedField : "market_cap";
-
-  console.log(sortedField);
-  console.log(orderField);
+  const [searchInput, setSearchInput] = useState<string>("");
+  const [searchData, setSearchData] = useState<Asset[]>([]);
 
   const { data, error, isLoading } = useAssets(orderField, sortedField);
 
@@ -20,42 +29,55 @@ const Home: NextPage = () => {
     setSortedField(sortFiled);
     setOrderField(orderField == "desc" ? "asc" : "desc");
   };
-  // const handleOrderClick = () => {
-  //   setOrderField(orderField == "desc" ? "asc" : "desc");
-  // };
 
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (error) {
-  //   return <div>Error: {(error as Error).message}</div>;
-  // }
+  const filterOnSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (data) {
+      console.log(searchInput);
+      const filteredData = data.filter(
+        (asset: Asset) =>
+          asset.symbol.toLowerCase() === searchInput.toLowerCase() ||
+          asset.name.toLowerCase() === searchInput.toLowerCase()
+      );
+      setSearchData(filteredData);
+    }
+  };
 
   console.log(data);
+  console.log(searchData);
 
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column">
-      <SearchBar />
+      <SearchBar
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearch={filterOnSearch}
+      />
+
       {isLoading ? (
         <div>Loading...</div>
       ) : error ? (
         <div>Error in loading data from API</div>
       ) : (
-        <AssetsTable
-          assets={data}
-          sortedField={sortedField}
-          handleSortClick={handleSortClick}
-          orderField={orderField}
-        />
+        <>
+          {searchInput && searchData.length > 0 ? (
+            <AssetsSearchTable assets={searchData} />
+          ) : searchInput && searchData.length === 0 ? (
+            <div>No result returned for this input, try again.</div>
+          ) : null}
+
+          <Divider />
+
+          <AssetsTable
+            assets={data}
+            sortedField={sortedField}
+            handleSortClick={handleSortClick}
+            orderField={orderField}
+          />
+        </>
       )}
     </Flex>
   );
 };
 
 export default Home;
-
-// https://tanstack.com/query/latest/docs/framework/react/overview
-// https://chakra-ui.com/docs/getting-started
-// https://nextjs.org/docs
-// import Link from "next/link";

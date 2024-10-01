@@ -1,6 +1,23 @@
-import { Box, Button, Heading, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  FormControl,
+  Input,
+  FormLabel,
+  Text,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
-const SearchBar = () => {
+
+interface Props {
+  handleSearch: (e: React.FormEvent) => void;
+  searchInput: string;
+  setSearchInput: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SearchBar: React.FC<Props> = ({ handleSearch, searchInput, setSearchInput }) => {
   return (
     <Box
       p={4}
@@ -17,16 +34,26 @@ const SearchBar = () => {
         </Heading>
       </Box>
 
-      <InputGroup mt={2} width={{ base: "100%", md: "400px" }}>
-        <Input
-          type="text"
-          placeholder="Track your favourite crypto assets"
-          color="black"
-          border="none"
-          _placeholder={{ color: "gray.500", fontSize: { base: "sm", md: "md" } }}
-        />
-        <InputRightElement children={<Search2Icon color="gray.500" />} />
-      </InputGroup>
+      <form onSubmit={(e) => handleSearch(e)}>
+        <FormControl mt={4} width={{ base: "100%", md: "400px" }}>
+          <InputGroup>
+            <Input
+              id="search"
+              type="text"
+              value={searchInput}
+              placeholder="Track your favourite crypto assets"
+              color="black"
+              onChange={(e) => setSearchInput(e.target.value)}
+              _placeholder={{ color: "gray.500", fontSize: { base: "sm", md: "md" } }}
+            />
+            <InputRightElement>
+              <Button size="sm" onClick={handleSearch} type="submit" variant="link">
+                <Search2Icon />
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </FormControl>
+      </form>
     </Box>
   );
 };
