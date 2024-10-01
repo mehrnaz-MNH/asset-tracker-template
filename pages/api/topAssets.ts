@@ -4,15 +4,22 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Asset } from "@/types/asset";
 
 const apiKey = process.env.NEXT_PUBLIC_API_KEY as string;
-const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
+//const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
+
+const apiUrl =
+  "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=25";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { sortDir, sort } = req.query;
+
   try {
-    const response = await axios.get(apiUrl, {
+    const response = await axios.get(`${apiUrl}&sort=${sort}&sort_dir=${sortDir}`, {
       headers: {
         "X-CMC_PRO_API_KEY": apiKey,
       },
     });
+
+    console.log(response);
 
     const topAssets: Asset[] = response.data.data.map((entry: any) => ({
       id: entry.id,
