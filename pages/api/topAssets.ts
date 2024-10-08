@@ -19,8 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
 
-    console.log(response);
-
     const topAssets: Asset[] = response.data.data.map((entry: any) => ({
       id: entry.id,
       cmc_rank: entry.cmc_rank,
@@ -30,8 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       percent_change_24h: entry.quote.USD.percent_change_24h,
       market_cap: entry.quote.USD.market_cap,
     }));
-    console.log("TopAssets");
-    console.log(topAssets);
+
     res.status(200).json(topAssets);
   } catch (error) {
     res.status(500).json({ message: "Failed to Fetch Data : ", error: error });

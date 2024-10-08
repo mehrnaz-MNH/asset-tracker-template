@@ -8,8 +8,8 @@ interface Props {
 }
 
 const AssetsSearchTable: React.FC<Props> = ({ assets }) => (
-  <TableContainer mb={20}>
-    <Table variant="stripped">
+  <TableContainer>
+    <Table variant="unstyled">
       <Thead>
         <Tr>
           <Th>#</Th>
