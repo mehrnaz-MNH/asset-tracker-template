@@ -12,25 +12,32 @@ interface Props {
 
 const AssetsTable: React.FC<Props> = ({ assets, sortedField, handleSortClick, orderField }) => {
   return (
-    <Box bg="gray.900" p={6} borderRadius="md" boxShadow="xl">
-      <Box bg="gray.800" p={4} borderRadius="md">
-        {/* Header mimicking table header */}
-        <Flex justify="space-between" textColor="gray.400" fontWeight="bold">
-          <Flex w="20%" alignItems="center">
+    <Box
+      bg="#1E1E1E
+"
+      p={6}
+      borderRadius="md"
+      boxShadow="xl"
+      w={["100%", "100%", "90%", "80%", "70%"]}
+      fontSize={["11px ", "13px", "15px", "18px", "20px"]}
+    >
+      <Box bg="#2F2E2E" p={4} borderRadius="md" mb={5} alignItems="center">
+        <Flex justify="space-between" textColor="gray.400" fontWeight="bold" textAlign="center">
+          <Flex w="10%" alignItems="center">
             <Text>#</Text>
             <Button variant="link" onClick={() => handleSortClick("market_cap")}>
               <Icon
                 as={
-                  sortedField === "cmc_rank" && orderField === "asc"
+                  sortedField === "market_cap" && orderField === "asc"
                     ? TriangleUpIcon
                     : TriangleDownIcon
                 }
-                color={sortedField === "cmc_rank" ? "purple.400" : "gray.400"}
+                color={sortedField === "market_cap" ? "purple.400" : "gray.400"}
               />
             </Button>
           </Flex>
 
-          <Flex w="30%" alignItems="center">
+          <Flex w="20%" alignItems="center">
             <Text>Name</Text>
             <Button variant="link" onClick={() => handleSortClick("name")}>
               <Icon
@@ -56,7 +63,7 @@ const AssetsTable: React.FC<Props> = ({ assets, sortedField, handleSortClick, or
             </Button>
           </Flex>
 
-          <Flex w="25%" alignItems="center">
+          <Flex w="25%" alignItems="center" justify={"center"}>
             <Text>24h %</Text>
             <Button variant="link" onClick={() => handleSortClick("percent_change_24h")}>
               <Icon
@@ -72,12 +79,11 @@ const AssetsTable: React.FC<Props> = ({ assets, sortedField, handleSortClick, or
         </Flex>
       </Box>
 
-      {/* Body to display each asset */}
-      <Box>
+      <Flex rowGap={"8px"} flexDirection="column">
         {assets.map((asset) => (
           <AssetCard key={asset.id} asset={asset} />
         ))}
-      </Box>
+      </Flex>
     </Box>
   );
 };

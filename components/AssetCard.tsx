@@ -18,16 +18,26 @@ function formatNumber(num: number): string {
 
 const AssetCard: React.FC<Props> = ({ asset }) => {
   return (
-    <Flex justify="space-between" p={4} bg="gray.900" textColor="white" gap={"20px"}>
+    <Flex
+      justify="space-between"
+      textColor="white"
+      bg="#2F2E2E
+"
+      p={4}
+      borderRadius="md"
+      boxShadow="md"
+      alignItems="center"
+      _hover={{ bg: "#9747FF" }}
+    >
       {/* Rank */}
-      <Flex w="15%" alignItems="center">
+      <Flex w="10%" alignItems="center">
         <Box>#{asset.cmc_rank}</Box>
       </Flex>
 
       {/* Name and Market Cap */}
-      <Flex w="30%" alignItems="center">
+      <Flex w="20%" justify={["left", "left", "center"]}>
         <Image
-          boxSize="30px"
+          boxSize={["20px", "35px"]}
           mr={4}
           src={`/assets/color/${asset.symbol.toLowerCase()}.svg`}
           alt={`${asset.symbol} icon`}
@@ -36,22 +46,34 @@ const AssetCard: React.FC<Props> = ({ asset }) => {
           }}
         />
         <Stat>
-          <StatLabel>{asset.symbol}</StatLabel>
-          <StatLabel color="gray.500">{formatNumber(asset.market_cap)}</StatLabel>
+          <StatLabel fontSize={["11px ", "13px", "15px", "18px", "20px"]}>{asset.symbol}</StatLabel>
+          <StatLabel color="gray.500" fontSize={["11px ", "13px", "15px", "18px", "20px"]}>
+            {asset.market_cap === null ? "0.00" : formatNumber(asset.market_cap)}
+          </StatLabel>
         </Stat>
       </Flex>
 
       {/* Price */}
-      <Flex w="30%" alignItems="center">
-        <Box>{currencyFormat(asset.price)}</Box>
+      <Flex w="25%" justify={["right", "right", "left"]}>
+        <Box>{asset.price === null ? "0.00" : currencyFormat(asset.price)}</Box>
       </Flex>
 
       {/* 24h Change */}
-      <Flex w="25%" alignItems="center">
+      <Flex w="25%" alignItems={"center"}>
         <Stat>
-          <StatHelpText>
+          <StatHelpText
+            bg={asset.percent_change_24h >= 0 ? "#24FF001A" : "#FF00001A"}
+            fontSize={["11px ", "13px", "15px", "18px", "20px"]}
+            w={"fit-content"}
+            textAlign="center"
+            textColor={asset.percent_change_24h >= 0 ? "#24FF00" : "#FF0000"}
+            borderRadius="md"
+          >
             <StatArrow type={asset.percent_change_24h >= 0 ? "increase" : "decrease"} />
-            {Math.abs(asset.percent_change_24h).toFixed(2)}%
+            {asset.percent_change_24h === null
+              ? "0.00"
+              : formatNumber(Math.abs(asset.percent_change_24h))}
+            %
           </StatHelpText>
         </Stat>
       </Flex>
@@ -60,37 +82,3 @@ const AssetCard: React.FC<Props> = ({ asset }) => {
 };
 
 export default AssetCard;
-
-// <Th>#</Th>
-//             <Th>Name</Th>
-//             <Th>Price</Th>
-//             <Th>24h%</Th>
-
-// <ListItem key={asset.id} justifyContent="center" alignItems="center">
-//     <Box
-//       display="flex"
-//       flexDirection="row"
-//       borderWidth="1px"
-//       borderRadius="lg"
-//       overflow="hidden"
-//       p={4}
-//       boxShadow="md"
-//       _hover={{ boxShadow: "xl", transform: "scale(1.02)" }}
-//       transition="0.3s ease-in-out"
-//     >
-//       <p># {asset.cmc_rank}</p>
-//       <p>{asset.name}</p>
-//       <Image
-//         boxSize="100px"
-//         src={`/assets/color/${asset.symbol.toLowerCase()}.svg`}
-//         alt={`${asset.symbol} icon`}
-//         onError={(e) => {
-//           e.currentTarget.src = "/assets/color/generic.svg";
-//           e.currentTarget.alt = "Generic icon";
-//         }}
-//       />
-//       <p>{formatNumber(asset.market_cap)}</p>
-//       <p>{currencyFormat(asset.price)}</p>
-//       <p>%{asset.percent_change_24h.toFixed(2)}</p>
-//     </Box>
-//   </ListItem>

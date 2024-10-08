@@ -33,7 +33,14 @@ const Home: NextPage = () => {
   };
 
   return (
-    <Flex justifyContent="center" alignItems="center" flexDirection="column">
+    <Flex
+      bg="#1E1E1E"
+      height="fit-content"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      textColor={"white"}
+    >
       <SearchBar
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -41,27 +48,25 @@ const Home: NextPage = () => {
       />
 
       {isLoading ? (
-        <div>Loading...</div>
+        <div style={{ backgroundColor: "#1E1E1E", color: "white" }}>Loading...</div>
       ) : error ? (
-        <div>Error in loading data from API</div>
+        <div style={{ backgroundColor: "#1E1E1E", color: "white" }}>
+          Error in loading data from API
+        </div>
       ) : (
         <>
           {searchInput && assetData?.length > 0 ? (
             <AssetsSearchTable assets={assetData} />
           ) : searchInput && assetData?.length === 0 ? (
             <div>No result returned for this input, try again.</div>
-          ) : null}
-
-          <Divider m={25} />
-
-          <Heading mb={30}>Top 25 Crypto Assets</Heading>
-
-          <AssetsTable
-            assets={data}
-            sortedField={sortedField}
-            handleSortClick={handleSortClick}
-            orderField={orderField}
-          />
+          ) : (
+            <AssetsTable
+              assets={data}
+              sortedField={sortedField}
+              handleSortClick={handleSortClick}
+              orderField={orderField}
+            />
+          )}
         </>
       )}
     </Flex>

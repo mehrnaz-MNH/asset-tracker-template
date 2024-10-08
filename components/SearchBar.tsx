@@ -20,11 +20,10 @@ interface Props {
 const SearchBar: React.FC<Props> = ({ handleSearch, searchInput, setSearchInput }) => {
   return (
     <Box
+      w={["100%", "100%", "90%", "80%", "70%"]}
       p={4}
       maxW="100%"
       display="flex"
-      alignItems="center"
-      justifyContent="space-between"
       flexDirection="column"
       mb={15}
     >
@@ -35,14 +34,14 @@ const SearchBar: React.FC<Props> = ({ handleSearch, searchInput, setSearchInput 
       </Box>
 
       <form onSubmit={(e) => handleSearch(e)}>
-        <FormControl mt={4} width={{ base: "100%", md: "400px" }}>
-          <InputGroup>
+        <FormControl mt={4}>
+          <InputGroup borderBlock="none" borderBlockEnd="none" borderBlockEndStyle="none">
             <Input
               id="search"
               type="text"
               value={searchInput}
               placeholder="Track your favourite crypto assets"
-              color="black"
+              color="white"
               onChange={(e) => setSearchInput(e.target.value)}
               _placeholder={{ color: "gray.500", fontSize: { base: "sm", md: "md" } }}
             />
